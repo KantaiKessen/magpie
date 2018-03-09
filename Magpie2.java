@@ -37,19 +37,24 @@ public class Magpie2 {
      */
     public String getResponse(String statement) {
         String response = "";
-        if (statement.contains("remember"))
+        if (statement.contains("remember")) {
             addToMemory();
-        if (statement.contains("recall"))
-            recallFromMemory();
-        if (statement.contains("no")) {
+            return "Item remembered";
+        }
+        if (statement.contains("recall")) {
+            getFromMemory();
+            return "Recall Complete";
+        }
+        if (statement.contains("no"))
             response = "Why so negative?";
-        } else if (statement.contains("mother")
+        else if (statement.contains("mother")
                 || statement.contains("father")
                 || statement.contains("sister")
                 || statement.contains("brother")
                 || statement.contains("family")) {
             response = "Tell me more about your family.";
-        } else if (statement.contains("Computer Science"))
+        }
+        else if (statement.contains("Computer Science"))
             response = "Yes, it is my favorite course.";
         else if (statement.contains("yourself"))
             response = "I was created for the 2015 test.";
@@ -71,9 +76,10 @@ public class Magpie2 {
         information.add(s.nextLine());
     }
 
-    private void recallFromMemory() {
+    private void getFromMemory() {
         System.out.println("What is the name of the thing you want me to recall");
-        System.out.println(information.get(item.indexOf(s.nextLine())));
+        String inputStatement = s.nextLine();
+        System.out.println(item.contains(inputStatement) ? information.get(item.indexOf(inputStatement)) : "I could not find that");
     }
 
     /**
